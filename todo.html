@@ -1,0 +1,79 @@
+<input type="text" id="task" />
+<button onclick="addToList()">Add</button>
+
+<ul id="todolist">
+    
+</ul>
+
+<script>
+
+todolist = ["abc", "xyz"]
+
+function showList() {
+    
+    output = "";
+
+    for(let i = 0; i < todolist.length; i++) {
+        output = output + `<li>
+            <span onclick="taskDone(this)"> ${todolist[i]} </span> 
+            <button onclick="removeFromList('${todolist[i]}')">X</button></li>`
+    }
+
+    document.getElementById("todolist").innerHTML = output
+
+}
+
+
+function taskDone(ele) {
+    
+    temp = ele.innerHTML
+
+    ele.innerHTML = temp.strike()
+}
+
+
+showList();
+
+
+
+
+function removeFromList(task) {
+
+    const index = todolist.indexOf(task);
+    if (index > -1) {
+        todolist.splice(index, 1);
+    }
+
+    showList()
+}
+
+
+
+
+
+
+var task = document.getElementById("task");
+
+task.addEventListener("keydown", (e) => {
+    if (e.code === "Enter") {
+        addToList()
+    }
+});
+
+
+function addToList() {
+    
+    task = document.getElementById("task").value;
+
+    todolist.push(task);
+
+    showList()
+
+    document.getElementById("task").value = ""
+
+
+}
+
+
+
+</script>
